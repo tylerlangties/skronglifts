@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "skronglifts",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

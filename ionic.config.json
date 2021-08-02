@@ -1,0 +1,7 @@
+{
+  "name": "skronglifts",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
