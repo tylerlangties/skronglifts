@@ -3,5 +3,6 @@ export default interface IWorkout {
   id: number;
   cycle: string;
   exercises: Exercise[];
-  dateCompleted: string;
+  completed: boolean;
+  dateCompleted?: string;
 }

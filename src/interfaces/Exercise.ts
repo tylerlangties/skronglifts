@@ -4,5 +4,6 @@ export default interface IExercise {
   reps: number;
   sets: number;
   weight: number;
-  dateComplete: string;
+  completed: boolean;
+  dateCompleted?: string;
 }
