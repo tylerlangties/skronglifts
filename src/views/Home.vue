@@ -37,7 +37,7 @@ import {
   // IonButton,
 } from "@ionic/vue";
 import Card from "../components/Card.vue";
-import { getNextWorkout } from "@/services/index.js";
+import { getNextWorkout } from "@/services/index";
 
 export default defineComponent({
   name: "Home",
