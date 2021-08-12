@@ -12,33 +12,29 @@
 
     <ion-content :fullscreen="true">
       <ion-grid>
-        <ion-row>
+        <!-- Exercise Rows -->
+        <ion-row v-for="exercise in currentExercises" :key="exercise.id">
           <ion-col>
             <ion-text>
-              <h6 class="m-0">Squat</h6>
+              <h6 class="m-0">
+                {{ exercise.name }} {{ exercise.sets }} X {{ exercise.reps }}
+              </h6>
             </ion-text>
           </ion-col>
+          <!-- Set Rows -->
+          <ion-row>
+            <ion-col
+              v-for="(sets, index) in exercise.sets"
+              :key="index"
+              class="center"
+            >
+              <SetButton :exercise="exercise" />
+            </ion-col>
+          </ion-row>
           <ion-col class="exercise__header">
             <ion-button @click="$router.push('/edit-exercise')"
-              >5x5 45lb <ion-icon :icon="arrowForwardOutline"></ion-icon
+              >Edit <ion-icon :icon="arrowForwardOutline"></ion-icon
             ></ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="center">
-            <SetButton />
-          </ion-col>
-          <ion-col class="center"> 
-            <SetButton />
-          </ion-col>
-          <ion-col class="center">
-            <SetButton />
-          </ion-col>
-          <ion-col class="center">
-            <SetButton />
-          </ion-col>
-          <ion-col class="center">
-            <SetButton />
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -62,9 +58,10 @@ import {
   IonBackButton,
   IonButtons,
 } from "@ionic/vue";
-import SetButton from '../components/SetButton.vue'
+import SetButton from "../components/SetButton.vue";
 import { arrowForwardOutline } from "ionicons/icons";
 import { defineComponent } from "vue";
+import { getCurrentWorkout } from "@/services/index";
 
 export default defineComponent({
   name: "Home",
@@ -85,7 +82,9 @@ export default defineComponent({
     IonToolbar,
   },
   setup() {
-    return { arrowForwardOutline };
+    const currentWorkout = getCurrentWorkout();
+    const currentExercises = currentWorkout.exercises;
+    return { arrowForwardOutline, currentWorkout, currentExercises };
   },
 });
 </script>
@@ -95,7 +94,7 @@ export default defineComponent({
   display: flex;
   justify-content: flex-end;
 }
-.center{
+.center {
   display: flex;
   justify-content: center;
 }
