@@ -1,5 +1,7 @@
 <template>
-  <ion-button @click="onSelect()" :color="color" shape="round">{{ repCount }}</ion-button>
+  <ion-button @click="onSelect()" :color="color" shape="round">{{
+    repCount
+  }}</ion-button>
 </template>
 
 <script lang="ts">
@@ -11,7 +13,12 @@ export default defineComponent({
   components: {
     IonButton,
   },
-  setup() {
+  props: {
+    exercise: {
+      type: Object,
+    },
+  },
+  setup(props) {
     const color = ref("primary");
     const complete = ref(false);
     const repCount = ref(5);
@@ -23,7 +30,7 @@ export default defineComponent({
       } else if (repCount.value === 0) {
         complete.value = false;
         repCount.value = 5;
-        color.value="primary"
+        color.value = "primary";
       } else {
         repCount.value--;
       }
