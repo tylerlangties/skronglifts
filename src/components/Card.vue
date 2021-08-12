@@ -2,7 +2,7 @@
   <ion-card class="Card" @click="$router.push('/workout')">
     <ion-item>
       <ion-card-subtitle slot="start"
-        >Workout {{ source.workoutType }}</ion-card-subtitle
+        >Workout {{ source.cycle }}</ion-card-subtitle
       >
       <ion-card-subtitle slot="end">{{ source.date }}</ion-card-subtitle>
     </ion-item>
@@ -12,9 +12,9 @@
       :key="key"
       class="ion-activated"
     >
-      <ion-label slot="start">{{ exercise.label }}</ion-label>
+      <ion-label slot="start">{{ exercise.name }}</ion-label>
       <ion-label class="right" slot="end"
-        >{{ `${exercise.setCount}x${exercise.repCount}` }}
+        >{{ `${exercise.sets}x${exercise.reps}` }}
         {{ exercise.weight }}lb</ion-label
       >
     </ion-item>
@@ -54,4 +54,3 @@ export default defineComponent({
   border-left: 5px solid red;
 }
 </style>
-
