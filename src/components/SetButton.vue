@@ -1,6 +1,6 @@
 <template>
   <ion-button @click="onSelect()" :color="color" shape="round">{{
-    repCount
+    counter
   }}</ion-button>
 </template>
 
@@ -16,26 +16,30 @@ export default defineComponent({
   props: {
     exercise: {
       type: Object,
+      required: true,
     },
   },
-  setup(props) {
+  setup(props, context) {
     const color = ref("primary");
-    const complete = ref(false);
-    const repCount = ref(5);
+    const completed = ref(false);
+    const repCount = ref(props.exercise.reps);
+    const counter = ref(+repCount.value);
 
     const onSelect = () => {
-      if (complete.value === false) {
-        complete.value = true;
+      if (completed.value === false) {
+        completed.value = true;
         color.value = "danger";
-      } else if (repCount.value === 0) {
-        complete.value = false;
-        repCount.value = 5;
+        context.emit("completed", props.exercise.id);
+      } else if (counter.value === 0) {
+        completed.value = false;
+        counter.value = repCount.value;
         color.value = "primary";
+        context.emit("reset", props.exercise.id);
       } else {
-        repCount.value--;
+        counter.value--;
       }
     };
-    return { complete, repCount, color, onSelect };
+    return { completed, repCount, color, onSelect, counter };
   },
 });
 </script>

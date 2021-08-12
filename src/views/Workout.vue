@@ -28,7 +28,11 @@
               :key="index"
               class="center"
             >
-              <SetButton :exercise="exercise" />
+              <SetButton
+                :exercise="exercise"
+                @completed="markSetComplete"
+                @reset="resetSet"
+              />
             </ion-col>
           </ion-row>
           <ion-col class="exercise__header">
@@ -62,6 +66,7 @@ import SetButton from "../components/SetButton.vue";
 import { arrowForwardOutline } from "ionicons/icons";
 import { defineComponent } from "vue";
 import { getCurrentWorkout } from "@/services/index";
+import Exercise from "@/interfaces/Exercise";
 
 export default defineComponent({
   name: "Home",
@@ -85,6 +90,29 @@ export default defineComponent({
     const currentWorkout = getCurrentWorkout();
     const currentExercises = currentWorkout.exercises;
     return { arrowForwardOutline, currentWorkout, currentExercises };
+  },
+  methods: {
+    markSetComplete(id: number) {
+      this.currentExercises.find((x: Exercise) => {
+        if (x.id === id) x.setsCompleted++;
+      });
+      this.checkCompleteExercise();
+    },
+    resetSet(id: number) {
+      this.currentExercises.find((x: Exercise) => {
+        if (x.id === id) x.setsCompleted--;
+      });
+      this.checkCompleteExercise();
+    },
+    checkCompleteExercise() {
+      this.currentExercises.some((x: Exercise) => {
+        if (x.setsCompleted === x.sets) {
+          x.completed = true;
+        } else {
+          x.completed = false;
+        }
+      });
+    },
   },
 });
 </script>
