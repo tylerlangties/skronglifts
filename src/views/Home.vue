@@ -37,7 +37,7 @@ import {
   // IonButton,
 } from "@ionic/vue";
 import Card from "../components/Card.vue";
-import { getNextWorkout } from "@/services/index";
+import { getCurrentWorkout } from "@/services/index";
 
 export default defineComponent({
   name: "Home",
@@ -51,7 +51,7 @@ export default defineComponent({
     IonToolbar,
   },
   setup() {
-    const nextWorkout = getNextWorkout();
+    const nextWorkout = getCurrentWorkout();
     return { nextWorkout };
   },
 });
