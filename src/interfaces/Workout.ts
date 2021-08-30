@@ -5,4 +5,5 @@ export default interface IWorkout {
   exercises: Exercise[];
   completed: boolean;
   dateCompleted?: string;
+  notes?: string;
 }

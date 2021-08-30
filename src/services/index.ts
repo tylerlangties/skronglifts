@@ -7,7 +7,7 @@ import {
   defaultRows,
   defaultOverheadPress,
   defaultDeadlift,
-} from "@/store/ExerciseDefaults.ts";
+} from "@/defaults/ExerciseDefaults";
 
 // const workoutA: Workout = {
 //   id: 0,
